@@ -1,19 +1,20 @@
 
 
-function MovieCard() {
+function MovieCard({ data }) {
 
   return (
 
-    <div className="col col-md-4">
-      <div className="card">
-        <img src="..." className="card-img-top" alt="..." />
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <a href="#" className="btn btn-primary">Go somewhere</a>
-        </div>
+
+    <div className="card">
+      <img src={data.image} className="card-img-top" alt={data.title} />
+      <div className="card-body">
+        <h5 className="card-title">{data.title}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{data.director}</h6>
+        <p className="card-text">{data.abstract}</p>
+        <a href="#" className="btn btn-primary">Movie Detail</a>
       </div>
     </div>
+
 
   )
 
