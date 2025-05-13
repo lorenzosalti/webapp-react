@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import ReviewCard from "../components/ReviewCard"
+import StarRating from "../components/StarRating"
 
 
 function MovieDetailPage() {
@@ -26,7 +27,6 @@ function MovieDetailPage() {
 
 
   const { title, director, abstract, average_vote, reviews } = movie
-  console.log(reviews)
 
   return (
     <>
@@ -34,7 +34,7 @@ function MovieDetailPage() {
         <h2>{title}</h2>
         <h4>Director: {director}</h4>
         <p>{abstract}</p>
-        <h6>{average_vote}</h6>
+        <h6><StarRating vote={average_vote} /></h6>
       </section>
 
       <section className="container">
