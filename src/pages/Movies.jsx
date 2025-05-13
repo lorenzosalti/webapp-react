@@ -14,7 +14,6 @@ function MoviesPage() {
 
     axios.get(moviesUrl, { params: { search } })
       .then(res => {
-        console.log(res.data);
         setMovies(res.data);
       })
       .catch(err => console.error(err))
