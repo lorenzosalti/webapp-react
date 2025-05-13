@@ -34,7 +34,7 @@ function MoviesPage() {
 
           {movies.length ? movies.map(movie => (
             <div className="col col-md-4">
-              <MovieCard data={movie} />
+              <MovieCard data={movie} key={movie.id} />
             </div>
           )) : <div>404 No element found</div>}
 
