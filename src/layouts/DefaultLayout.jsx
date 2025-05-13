@@ -8,7 +8,7 @@ function DefaultLayout() {
   return (
     <>
       <Header />
-      <main>
+      <main className="mb-4">
         <Outlet />
       </main>
     </>
