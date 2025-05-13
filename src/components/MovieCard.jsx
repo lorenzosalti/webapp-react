@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom"
 
 function MovieCard({ data }) {
 
@@ -14,7 +14,7 @@ function MovieCard({ data }) {
         <h6 className="card-subtitle mb-2 text-body-secondary">{director}</h6>
         <p className="card-text mb-2">{abstract}</p>
         <h6 className="card-subtitle mb-2">{average_vote}</h6>
-        <a href="#" className="btn btn-primary">Movie Detail</a>
+        <Link to={`/movies/${id}`} className="btn btn-primary">Movie Detail</Link>
       </div>
     </div>
 
