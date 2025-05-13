@@ -12,31 +12,37 @@ function MoviesPage() {
 
   function getMovies() {
 
-    axios.get(moviesUrl)
+    axios.get(moviesUrl, { params: { search } })
       .then(res => {
         console.log(res.data);
         setMovies(res.data);
       })
       .catch(err => console.error(err))
-
   }
 
   function getSearch(e) {
     setSearch(e.target.value)
   }
 
+  function searchMovies(e) {
+    e.preventDefault()
+    getMovies()
+  }
+
   useEffect(getMovies, [])
+
 
   return (
     <div className="container">
+
       <h1 className="mb-4">Movies</h1>
 
       <section className="container text-center">
+
         <div className="container d-flex justify-content-between mb-4">
           <h2>Greatest Movies of all time</h2>
-
-          <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" value={search} onChange={(e) => getSearch(e)} />
+          <form className="d-flex" role="search" onSubmit={searchMovies}>
+            <input className="form-control me-2" type="search" placeholder="Search" value={search} onChange={getSearch} />
             <button className="btn btn-outline-primary" type="submit">Search</button>
           </form>
         </div>
@@ -50,6 +56,7 @@ function MoviesPage() {
           )) : <div>404 No element found</div>}
 
         </div>
+
       </section>
     </div>
   )
