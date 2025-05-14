@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-function ReviewForm({ id }) {
+function ReviewForm({ movieId, refreshMovie }) {
 
   const blankReview = {
     name: '',
@@ -9,7 +9,7 @@ function ReviewForm({ id }) {
     text: ''
   }
 
-  const url = `http://localhost:3000/movies/${id}/reviews`
+  const url = `http://localhost:3000/movies/${movieId}/reviews`
 
   const [reviewData, setReviewData] = useState(blankReview)
 
@@ -30,6 +30,7 @@ function ReviewForm({ id }) {
       .then(res => console.log(res.data))
       .catch(err => console.error(err))
 
+    refreshMovie()
     setReviewData(blankReview)
   }
 
