@@ -42,7 +42,7 @@ function MovieDetailPage() {
         <h3 className="mb-2">Reviews</h3>
         {reviews ? reviews.map(review => <ReviewCard data={review} key={review.id} />) : <div>Loading</div>}
 
-        <ReviewForm />
+        <ReviewForm id={id} />
 
       </section>
     </>

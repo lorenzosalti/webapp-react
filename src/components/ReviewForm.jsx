@@ -1,21 +1,66 @@
+import { useState } from "react"
+import axios from "axios"
 
+function ReviewForm({ id }) {
 
-function ReviewForm() {
+  const blankReview = {
+    name: '',
+    vote: 0,
+    text: ''
+  }
+
+  const url = `http://localhost:3000/movies/${id}/reviews`
+
+  const [reviewData, setReviewData] = useState(blankReview)
+
+  function handleReviewtData(event) {
+
+    const eventValue = event.target.value
+
+    setReviewData(prev => ({
+      ...prev,
+      [event.target.name]: eventValue
+    }))
+  }
+
+  function handleReviewSubmit(event) {
+    event.preventDefault()
+
+    axios.post(url, reviewData)
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
+
+    setReviewData(blankReview)
+  }
+
 
   return (
     <div className="card">
       <div className="card-header">
         New Review
       </div>
-      <form className="card-body">
+      <form className="card-body" onSubmit={handleReviewSubmit}>
 
         <div className="mb-3">
           <label htmlFor="new-review-name" className="form-label">Name</label>
-          <input type="text" className="form-control" id="new-review-name" placeholder="Your Name" />
+          <input
+            type="text"
+            className="form-control"
+            id="new-review-name"
+            name="name"
+            value={reviewData.name}
+            onChange={handleReviewtData}
+            placeholder="Your Name" />
         </div>
         <div className="mb-3">
           <label htmlFor="new-review-vote" className="form-label">Vote</label>
-          <select className="form-select" id="new-review-vote" aria-label="Movie Vote">
+          <select
+            className="form-select"
+            id="new-review-vote"
+            name="vote"
+            value={reviewData.vote}
+            onChange={handleReviewtData}
+            aria-label="Movie Vote">
             <option defaultValue="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -25,10 +70,16 @@ function ReviewForm() {
         </div>
         <div className="mb-3">
           <label htmlFor="new-review-text" className="form-label">Text</label>
-          <textarea className="form-control" id="new-review-text" placeholder="Insert Review" />
+          <textarea
+            className="form-control"
+            id="new-review-text"
+            name="text"
+            value={reviewData.text}
+            onChange={handleReviewtData}
+            placeholder="Insert Review" />
         </div>
 
-        <a href="#" className="btn btn-primary">Add Review</a>
+        <button className="btn btn-primary">Add Review</button>
 
       </form>
     </div>
