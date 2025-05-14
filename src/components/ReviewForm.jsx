@@ -49,6 +49,7 @@ function ReviewForm({ movieId, refreshMovie }) {
             className="form-control"
             id="new-review-name"
             name="name"
+            maxlength="30"
             value={reviewData.name}
             onChange={handleReviewtData}
             placeholder="Your Name" />
@@ -75,6 +76,7 @@ function ReviewForm({ movieId, refreshMovie }) {
             className="form-control"
             id="new-review-text"
             name="text"
+            maxlength="500"
             value={reviewData.text}
             onChange={handleReviewtData}
             placeholder="Insert Review" />
