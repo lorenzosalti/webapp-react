@@ -5,21 +5,25 @@ import ReviewCard from "../components/ReviewCard"
 import StarRating from "../components/StarRating"
 import ReviewForm from "../components/ReviewForm"
 
+import { useContext } from "react"
+import GlobalContext from "../contexts/GlobalContext"
+
 
 function MovieDetailPage() {
 
   const { id } = useParams()
   const [movie, setMovie] = useState({})
 
-
+  const { setIsLoading } = useContext(GlobalContext)
 
   const movieUrl = `http://localhost:3000/movies/${id}`
 
   function getMovie() {
+    setIsLoading(true)
     axios.get(movieUrl)
       .then(res => {
-        // console.log(res.data)
         setMovie(res.data)
+        setIsLoading(false)
       })
       .catch(err => console.error(err))
   }
@@ -40,7 +44,7 @@ function MovieDetailPage() {
 
       <section className="container">
         <h3 className="mb-2">Reviews</h3>
-        {reviews ? reviews.map(review => <ReviewCard data={review} key={review.id} />) : <div>Loading</div>}
+        {reviews ? reviews.map(review => <ReviewCard data={review} key={review.id} />) : <div>No Review</div>}
 
         <ReviewForm movieId={id} refreshMovie={getMovie} />
 

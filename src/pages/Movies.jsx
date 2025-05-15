@@ -2,19 +2,27 @@ import { useEffect, useState } from "react"
 import MovieCard from "../components/MovieCard"
 import axios from "axios"
 
+import { useContext } from "react"
+import GlobalContext from "../contexts/GlobalContext"
+
 
 function MoviesPage() {
 
   const [movies, setMovies] = useState([])
   const [search, setSearch] = useState('')
 
+  const { setIsLoading } = useContext(GlobalContext)
+
   const moviesUrl = 'http://localhost:3000/movies'
 
   function getMovies() {
 
+    setIsLoading(true)
+
     axios.get(moviesUrl, { params: { search } })
       .then(res => {
         setMovies(res.data);
+        setIsLoading(false)
       })
       .catch(err => console.error(err))
   }
